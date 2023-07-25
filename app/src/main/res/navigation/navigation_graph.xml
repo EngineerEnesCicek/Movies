@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_graph"
+    app:startDestination="@id/mainFragment">
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.example.movie.view.MainFragment"
+        android:label="fragment_main"
+        tools:layout="@layout/fragment_main" >
+        <action
+            android:id="@+id/action_mainFragment_to_detailFragment2"
+            app:destination="@id/detailFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_actorDetailFragment"
+            app:destination="@id/actorDetailFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_tvShowDetailFragment"
+            app:destination="@id/tvShowDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.example.movie.view.MovieDetailFragment"
+        android:label="fragment_detail"
+        tools:layout="@layout/fragment_detail" >
+        <argument
+            android:name="movieModel"
+            app:argType="com.example.movie.data.entitiy.MovieModel" />
+        <action
+            android:id="@+id/action_detailFragment_to_actorDetailFragment"
+            app:destination="@id/actorDetailFragment" />
+        <action
+            android:id="@+id/action_detailFragment_self"
+            app:destination="@id/detailFragment"
+            app:launchSingleTop="false"
+            app:popUpToInclusive="false" />
+    </fragment>
+    <fragment
+        android:id="@+id/actorDetailFragment"
+        android:name="com.example.movie.view.ActorDetailFragment"
+        android:label="fragment_actor_detail"
+        tools:layout="@layout/fragment_actor_detail" >
+        <action
+            android:id="@+id/action_actorDetailFragment_to_detailFragment"
+            app:destination="@id/detailFragment" />
+        <action
+            android:id="@+id/action_actorDetailFragment_to_tvShowDetailFragment"
+            app:destination="@id/tvShowDetailFragment" />
+        <argument
+            android:name="actorModel"
+            app:argType="com.example.movie.data.entitiy.ActorModel" />
+    </fragment>
+    <fragment
+        android:id="@+id/tvShowDetailFragment"
+        android:name="com.example.movie.view.TvShowDetailFragment"
+        android:label="fragment_tv_show_detail"
+        tools:layout="@layout/fragment_tv_show_detail" >
+        <argument
+            android:name="tvShowModel"
+            app:argType="com.example.movie.data.entitiy.TVShowModel" />
+        <action
+            android:id="@+id/action_tvShowDetailFragment_self"
+            app:destination="@id/tvShowDetailFragment" />
+        <action
+            android:id="@+id/action_tvShowDetailFragment_to_actorDetailFragment"
+            app:destination="@id/actorDetailFragment" />
+    </fragment>
+</navigation>
