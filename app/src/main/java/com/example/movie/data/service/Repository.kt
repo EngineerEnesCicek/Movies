@@ -8,35 +8,48 @@ import com.example.movie.data.entitiy.TVShowModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+
 class Repository {
-    fun getAllRetrofitResponse(apiKey:String,search:String,pageNumber:String,modelList:(ArrayList<MixModel>)->Unit){
+    fun getAllRetrofitResponse(
+        apiKey: String,
+        search: String,
+        pageNumber: String,
+        modelList: (ArrayList<MixModel>) -> Unit
+    ) {
         CoroutineScope(Dispatchers.IO).launch {
             val movieApi: MovieAPI = Services.service
-            val response=movieApi.getSearchAll(apiKey,search,pageNumber)
-            if (response.isSuccessful){
+            val response = movieApi.getSearchAll(apiKey, search, pageNumber)
+            if (response.isSuccessful) {
                 modelList(response.body()!!.model)
             }
         }
     }
-    fun getTrendTodayResponse(apiKey: String,movieList:(ArrayList<MixModel>)->Unit){
+
+    fun getTrendTodayResponse(apiKey: String, movieList: (ArrayList<MixModel>) -> Unit) {
         CoroutineScope(Dispatchers.IO).launch {
             val movieApi: MovieAPI = Services.service
-            val responseCall=movieApi.getTrend(apiKey)
-            if (responseCall.isSuccessful){
+            val responseCall = movieApi.getTrend(apiKey)
+            if (responseCall.isSuccessful) {
                 movieList(responseCall.body()!!.model)
             }
         }
     }
-    fun getTrendThisWeekResponse(apiKey: String,movieList: (ArrayList<MixModel>) -> Unit){
+
+    fun getTrendThisWeekResponse(apiKey: String, movieList: (ArrayList<MixModel>) -> Unit) {
         CoroutineScope(Dispatchers.IO).launch {
             val movieAPI: MovieAPI = Services.service
-            val response=movieAPI.getTrendThisWeek(apiKey)
-            if (response.isSuccessful){
+            val response = movieAPI.getTrendThisWeek(apiKey)
+            if (response.isSuccessful) {
                 movieList(response.body()!!.model)
             }
         }
     }
-    fun getRetrofitPersonIdResponse(personId:Int,apiKey:String,personModel: (ActorModel?)->Unit) {
+
+    fun getRetrofitPersonIdResponse(
+        personId: Int,
+        apiKey: String,
+        personModel: (ActorModel?) -> Unit
+    ) {
         CoroutineScope(Dispatchers.IO).launch {
             val movieApi: MovieAPI = Services.service
             val response = movieApi.getPerson(personId, apiKey, Constants.APPENDACTOR)
@@ -45,7 +58,12 @@ class Repository {
             }
         }
     }
-    fun getRetrofitTvShowIdResponse(tvShowId:Int,apiKey:String,tvShowModel: (TVShowModel?)->Unit) {
+
+    fun getRetrofitTvShowIdResponse(
+        tvShowId: Int,
+        apiKey: String,
+        tvShowModel: (TVShowModel?) -> Unit
+    ) {
         CoroutineScope(Dispatchers.IO).launch {
             val movieApi: MovieAPI = Services.service
             val response = movieApi.getTvShow(tvShowId, apiKey, Constants.APPENDTVSHOW)
@@ -54,7 +72,12 @@ class Repository {
             }
         }
     }
-    fun getRetrofitMovieIdResponse(movieId:Int,apiKey:String,movieModel: (MovieModel?)->Unit) {
+
+    fun getRetrofitMovieIdResponse(
+        movieId: Int,
+        apiKey: String,
+        movieModel: (MovieModel?) -> Unit
+    ) {
         CoroutineScope(Dispatchers.IO).launch {
             val movieApi: MovieAPI = Services.service
             val response = movieApi.getMovie(movieId, apiKey, Constants.APPENDMOVIE)
@@ -63,28 +86,43 @@ class Repository {
             }
         }
     }
-    fun getPopularMovies(apiKey:String,pageNumber:Int,movieModelList: (ArrayList<MovieModel>?)->Unit) {
+
+    fun getPopularMovies(
+        apiKey: String,
+        pageNumber: Int,
+        movieModelList: (ArrayList<MovieModel>?) -> Unit
+    ) {
         CoroutineScope(Dispatchers.IO).launch {
             val movieApi: MovieAPI = Services.service
-            val response = movieApi.getPopularMovies(apiKey,pageNumber)
+            val response = movieApi.getPopularMovies(apiKey, pageNumber)
             if (response.isSuccessful) {
                 response.body()?.let { movieModelList(it.results) }
             }
         }
     }
-    fun getPopularTvShow(apiKey:String,pageNumber:Int,tvShowModelList: (ArrayList<TVShowModel>?)->Unit) {
+
+    fun getPopularTvShow(
+        apiKey: String,
+        pageNumber: Int,
+        tvShowModelList: (ArrayList<TVShowModel>?) -> Unit
+    ) {
         CoroutineScope(Dispatchers.IO).launch {
             val movieApi: MovieAPI = Services.service
-            val response = movieApi.getPopularTvShow(apiKey,pageNumber)
+            val response = movieApi.getPopularTvShow(apiKey, pageNumber)
             if (response.isSuccessful) {
                 response.body()?.let { tvShowModelList(it.results) }
             }
         }
     }
-    fun getPopularActors(apiKey:String,pageNumber:Int,actorModelList: (ArrayList<ActorModel>?)->Unit) {
+
+    fun getPopularActors(
+        apiKey: String,
+        pageNumber: Int,
+        actorModelList: (ArrayList<ActorModel>?) -> Unit
+    ) {
         CoroutineScope(Dispatchers.IO).launch {
             val movieApi: MovieAPI = Services.service
-            val response = movieApi.getPopularPerson(apiKey,pageNumber)
+            val response = movieApi.getPopularPerson(apiKey, pageNumber)
             if (response.isSuccessful) {
                 response.body()?.let { actorModelList(it.results) }
             }

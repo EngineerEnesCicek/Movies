@@ -19,9 +19,11 @@ import com.example.movie.data.entitiy.MixModel
 class SearchResultsFragment : Fragment(), SelectListener {
     private lateinit var navController: NavController
     private var searchText: String = ""
+    private lateinit var adapter: SearchAdapter
     private lateinit var binding: FragmentSearchResultsBinding
     private lateinit var recyclerView: RecyclerView
     private lateinit var movieListViewModel: MovieListViewModel
+    private lateinit var layoutManager: LinearLayoutManager
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         navController = Navigation.findNavController(view)
@@ -33,23 +35,24 @@ class SearchResultsFragment : Fragment(), SelectListener {
     ): View {
         binding = FragmentSearchResultsBinding.inflate(layoutInflater, container, false)
         recyclerView = binding.searchRecyclerView
-        recyclerView.layoutManager = LinearLayoutManager(context)
+        layoutManager=LinearLayoutManager(context)
+        recyclerView.layoutManager = layoutManager
         movieListViewModel = ViewModelProvider(this)[MovieListViewModel::class.java]
         binding.button.setOnClickListener {
             searchText = binding.searchMovieText.text.toString()
-            show(searchText)
+            binding.searchMovieText.text.clear()
+            show()
         }
+
         return binding.root
     }
-
-    private fun show(name: String) {
-        movieListViewModel.searchAll(name, "1")
+    private fun show() {
+        movieListViewModel.searchAll(searchText, "1")
         movieListViewModel.mModels.observe(viewLifecycleOwner) {
-            val adapter = SearchAdapter(it, this)
+            adapter = SearchAdapter(it, this)
             recyclerView.adapter = adapter
         }
     }
-
     override fun onItemClicked(mixModel: MixModel) {
         itemClicked(mixModel,movieListViewModel,navController,viewLifecycleOwner)
     }
