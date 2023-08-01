@@ -9,7 +9,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.navArgs
-import com.example.movie.core.extensions.callFragment
 import com.example.movie.core.extensions.loadFromUrl
 import com.example.movie.core.extensions.set
 import com.example.movie.core.functions.getGenres
@@ -30,7 +29,7 @@ class MovieDetailFragment : Fragment() {
     ): View {
         binding = FragmentDetailBinding.inflate(layoutInflater, container, false)
         val tabLayout = binding.tabs
-        tabLayout.set(tabLayout,
+        tabLayout.set(
             detailTabLayoutList,childFragmentManager,fragmentList,
             frameLayoutForMovieDetail
         )

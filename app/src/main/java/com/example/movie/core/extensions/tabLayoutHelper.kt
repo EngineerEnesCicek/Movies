@@ -5,14 +5,14 @@ import androidx.fragment.app.FragmentManager
 import com.google.android.material.tabs.TabLayout
 
 
-fun TabLayout.set(tabLayout: TabLayout, stringList:ArrayList<String>,fragmentManager: FragmentManager, fragmentList:ArrayList<Fragment>, frameLayout:Int):TabLayout{
+fun TabLayout.set(stringList:ArrayList<String>,fragmentManager: FragmentManager, fragmentList:ArrayList<Fragment>, frameLayout:Int):TabLayout{
     stringList.forEach{
-        tabLayout.addTab(tabLayout.newTab().setText(it))
+        this.addTab(this.newTab().setText(it))
     }
     callFragment(fragmentList[0],fragmentManager,frameLayout)
-    tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
+    this.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener{
         override fun onTabSelected(tab: TabLayout.Tab?) {
-            when (tabLayout.selectedTabPosition) {
+            when (this@set.selectedTabPosition) {
                 0 -> {
                     callFragment(fragmentList[0], fragmentManager,frameLayout)
                 }

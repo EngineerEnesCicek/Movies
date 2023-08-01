@@ -53,7 +53,6 @@
                 android:src="@drawable/instagramicon" />
         </LinearLayout>
 
-
         <TextView
             android:textColor="@color/white"
             android:layout_height="wrap_content"

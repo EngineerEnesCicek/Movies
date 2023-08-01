@@ -74,7 +74,7 @@ class TvShowDetailFragment : Fragment() {
     }
     private fun tabLayout() {
         val tabLayout = binding.tabs
-        tabLayout.set(tabLayout,
+        tabLayout.set(
             detailTabLayoutList,childFragmentManager,fragmentList,
             frameLayoutForTvShowDetail
         )

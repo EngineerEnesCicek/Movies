@@ -23,7 +23,6 @@ class RecommendationFragment : Fragment(), SelectListener {
     private lateinit var list: ArrayList<MixModel>
     var name = ""
     var title = ""
-    private lateinit var mixModel: MixModel
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         navController = Navigation.findNavController(view)
         super.onViewCreated(view, savedInstanceState)

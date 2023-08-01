@@ -29,13 +29,12 @@ class ChildMainFragment : Fragment() {
     ): View {
         binding= FragmentChildMainBinding.inflate(layoutInflater,container,false)
         val tabLayoutPopular=binding.tabsPopular
-        tabLayoutPopular.set(tabLayoutPopular, popularTabLayoutList,childFragmentManager,fragmentPopularList,
+        tabLayoutPopular.set(popularTabLayoutList,childFragmentManager,fragmentPopularList,
             frameLayoutForPopular
         )
         callFragment(PopularMoviesFragment(),childFragmentManager, frameLayoutForPopular)
         val tabLayout = binding.tabs
-        tabLayout.set(tabLayout,
-            trendsTabLayoutList,childFragmentManager,fragmentTrendsList,
+        tabLayout.set(trendsTabLayoutList,childFragmentManager,fragmentTrendsList,
             frameLayoutForTrends
         )
         callFragment(TodayTrendsFragment(), childFragmentManager, frameLayoutForTrends)
